@@ -1,26 +1,26 @@
 version: '3'
 services:
-  nginx:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  app:
+    build: .
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=password
+      - DB_NAME=mydb
+    links:
+      - db
     ports:
       - "8000:8000"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-  mysql:
-    image: mysql
+      - .:/app
+  db:
+    image: mysql:8
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mydb
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=mydb
     volumes:
-      - db_data:/var/lib/mysql
-      - ./people.sql:/docker-entrypoint-initdb.d/people.sql
-  nodejs:
-    build:
-      context: .
-      dockerfile: NodeDockerfile
-    volumes:
-      - .:/usr/src/app
+      - db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
 volumes:
-  db_data:
+  db-data:
