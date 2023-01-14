@@ -1,0 +1,26 @@
+version: '3'
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./people.sql:/docker-entrypoint-initdb.d/people.sql
+  nodejs:
+    build:
+      context: .
+      dockerfile: NodeDockerfile
+    volumes:
+      - .:/usr/src/app
+volumes:
+  db_data:
