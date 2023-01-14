@@ -1,26 +1,31 @@
 version: '3'
 services:
-  app:
-    build: .
-    environment:
-      - DB_HOST=db
-      - DB_USER=root
-      - DB_PASSWORD=password
-      - DB_NAME=mydb
-    links:
-      - db
+  node:
+    build:
+      context: ./Node
     ports:
       - "8000:8000"
-    volumes:
-      - .:/app
-  db:
-    image: mysql:8
+    depends_on:
+      - db
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=mydb
-    volumes:
-      - db-data:/var/lib/mysql
+      - MYSQL_HOST=db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DB=people
+
+  db:
+    build:
+      context: ./MySQL
     ports:
       - "3306:3306"
-volumes:
-  db-data:
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=people
+
+  nginx:
+    build:
+      context: ./NGINX
+    ports:
+      - "8000:8000"
+    depends_on:
+      - node
