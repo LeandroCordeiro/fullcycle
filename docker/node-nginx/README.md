@@ -17,23 +17,40 @@ A aplicação estará disponível no endereço http://localhost:8000/
 
 ## Estrutura de pastas e arquivos
 .
+
 ├── docker-compose.yml
+
 ├── nginx
+
 │   ├── Dockerfile
+
 │   ├── default.conf
+
+
 │   └── html
+
 │       └── 502.html
+
 ├── mysql
+
 │   ├── Dockerfile
+
 │   └── create_table.sql
+
 └── node
-    ├── Dockerfile
-    ├── index.js
-    └── package.json
+
+│   ├── Dockerfile
+
+│   ├── index.js
+
+│   ├── package.json
 
 Cada pasta contém os arquivos específicos para cada imagem Docker:
 
 A pasta "nginx" contém o arquivo Dockerfile, a configuração do proxy reverso e uma página personalizada de erro 502.
+
 A pasta "mysql" contém o arquivo Dockerfile e o script de criação da tabela.
+
 A pasta "node" contém o arquivo Dockerfile, o arquivo principal da aplicação Node.js e o arquivo package.json.
+
 Eu também incluí novamente a informação de que o arquivo docker-compose.yml é responsável por gerenciar as dependências entre as imagens e garantir que o Node.js aguarde o MySQL estar disponível antes de iniciar.
