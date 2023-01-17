@@ -1,0 +1,42 @@
+version: '3'
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: mysql/Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+    ports:
+      - "3306:3306"
+    networks:
+      - app_network
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - "8000:80"
+    depends_on:
+      - mysql
+    networks:
+      - app_network
+    volumes:
+      - ./nginx/html:/etc/nginx/html
+
+
+
+  node:
+    build:
+      context: .
+      dockerfile: node/Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
