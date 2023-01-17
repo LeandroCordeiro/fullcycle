@@ -14,6 +14,7 @@ Esse desafio foi emocionante, especialmente porque eu nunca havia trabalhado com
 
 # Estrutura de pastas
 A estrutura de pastas para esse projeto é a seguinte:
+
 .
 ├── Dockerfile
 └── main.go
