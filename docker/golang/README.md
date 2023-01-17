@@ -4,9 +4,7 @@ Este desafio consiste em criar uma imagem Docker que imprime "Full Cycle Rocks!!
 
 Para cumprir este desafio, eu escrevi um programa em Go que imprime "Full Cycle Rocks!!" na tela. Em seguida, criei uma imagem Docker a partir deste programa e publiquei-a no Docker Hub com o nome "lecordeiro/fullcycle-golang".
 
-Para executar a imagem, você pode usar o seguinte comando:
-
-docker run lecordeiro/fullcycle-golang
+Para executar a imagem, você pode usar o seguinte comando: docker run lecordeiro/fullcycle-golang
 
 A imagem também está disponível no seguinte endereço: https://hub.docker.com/repository/docker/lecordeiro/fullcycle-golang, com data de expiração em 01/06/2023.
 
@@ -17,6 +15,7 @@ A estrutura de pastas para esse projeto é a seguinte:
 
 .
 ├── Dockerfile
+
 └── main.go
 
 
